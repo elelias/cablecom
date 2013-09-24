@@ -1,0 +1,63 @@
+
+
+///////WHAT THE CODE DOES//////
+
+The first step to create a database called 'toydatabase' with 5 tables:
++-----------------------+
+| Tables_in_toydatabase |
++-----------------------+
+| clientCommercialInfo  |
+| clientID              |
+| clientImmutables      |
+| clientMutables        |
+| serviceInfo           |
++-----------------------+
+
+The second step is generate random information from text files containing
+first names, second names, street names in NYC, as well as 
+random subscriptions to the services that upc-cablecom is currently offering.
+
+
+
+The third step is to analyze the data base looking for information that may be 
+intresting for upc-cablecom.
+
+//////WHAT THE CODE NEEEDS/////
+
+1) a running instance of MYSQL server
+2)python 2.7
+3)MySQLdb
+
+
+
+//////HOW THE CODE WORKS///////
+
+1. The code uses a connection from python to a MYSQL server.
+One only needs to update the information on line 6 in
+getConnectionToDB.py
+
+"con = mdb.connect('localhost', 'root', '123123123', 'toydatabase',charset='utf8');"
+
+where root is the user and '123123123' is the password.
+
+
+2. create and fill the database with random information:
+
+python createRandomInfo.py
+
+    2.1the first step is to check if the tables exist, if they do, it drops the tables
+    and creates them again via createDataBase_upc.py. On the first run, this will
+    produce some warnings.
+
+    2.2 fills the databases with random information.
+
+subsequent calls to createRandomInfo.py will drop existing tables if present and
+re-create them again.
+
+3. Analyze the database with some simple SQL queries.
+
+python analyzeDB.py
+
+For example, the last query finds what the average revenue is for those users who have a combi
+subscription and are younger than 40 years old.
+
