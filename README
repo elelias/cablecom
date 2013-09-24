@@ -9,7 +9,7 @@ click on "download as zip" on the right side of the page
 
 ///////WHAT THE CODE DOES//////
 
-The first step to create a database called 'toydatabase' with 5 tables:
+The first step to create, on a database called 'toydatabase', 5 tables:
 +-----------------------+
 | Tables_in_toydatabase |
 +-----------------------+
