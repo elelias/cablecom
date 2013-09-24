@@ -35,7 +35,9 @@ intresting for upc-cablecom.
 1) a running instance of MYSQL server
 2)python 2.7
 3)MySQLdb
-
+4) a database called toydatabase
+5) on a mysql session, run USE toydatabase
+6)see below
 
 
 //////HOW THE CODE WORKS///////
