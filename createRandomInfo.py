@@ -4,6 +4,7 @@ from getNames import *
 from costDictionary import *
 from insertIntoDB import *
 from getConnectionToDB import *
+from createDataBase_upc import *
 
 def chooseTV():
 
@@ -63,7 +64,7 @@ def chooseBundle():
 
 def createNameList():
 
-	maxSize=2000
+	#maxSize=2000
 
 	fNames=open('firstNames.txt','r')
 	lNames=open('lastNames.txt','r')	
@@ -80,7 +81,8 @@ def createNameList():
 	#
 	#
 	#
-	return listLastNames,listLastNames
+	#print 'the sizes of lists',len(listFirstNames)
+	return listFirstNames,listLastNames
 
 def createStreetNameList():
 
@@ -109,6 +111,7 @@ def createRandomInfo(recordLength):
 
 	clientID=0
 
+
 	for k in range(recordLength):
 
 
@@ -116,8 +119,9 @@ def createRandomInfo(recordLength):
 		clientID+=1
 		try:
 			name=listFirstNames.pop()
+
 		except IndexError:
-			print 'the list of first names is now emtpy'
+			print 'the list of first names is now emtpy, exiting...'
 			sys.exit()
 		surname=listLastNames.pop()
 		street=streetNameList.pop()
@@ -183,21 +187,7 @@ def createRandomInfo(recordLength):
 
 
 
-
-
-
-
-if __name__=='__main__':
-
-	if len(sys.argv)>1:
-		recordLength=sys.argv[1]
-	else:
-		recordLength=4000
-
-	global con
-	con=getConnectionToDataBase()
-
-
+def fillServiceInfo():
 
 	for a in [1,2,3,10,11,12,20,21,22,23,30,31,32]:
 
@@ -228,5 +218,27 @@ if __name__=='__main__':
 
 		insertIntoTable('serviceInfo',serviceInfoDic,con)
 
+
+def deleteTables():
+		sqlstring='DROP TABLE IF EXISTS clientID,clientMutables,clientImmutables,clientCommercialInfo,serviceInfo'
+		print 'removing tables if they exist '
+		print 'if they dont, a warning will pop up'
+		executeQuery(con,sqlstring)
+		print 'creating them again'
+		createTables()
+
+if __name__=='__main__':
+
+	if len(sys.argv)>1:
+		recordLength=sys.argv[1]
+	else:
+		recordLength=3200
+
+	global con
+	con=getConnectionToDataBase()
+
+	deleteTables()
+
+	fillServiceInfo()
 	createRandomInfo(recordLength)	
 

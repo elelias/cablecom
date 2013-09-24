@@ -18,7 +18,7 @@ def analyzeDB(con):
 	print ''	
 
 	result = executeQuery(con,sqlstring)
-	print 'total number of people using Horizon Comfort ',result[0][0]
+	print '--->total number of people using Horizon Comfort = ',result[0][0]
 
 	#2) what is the proportion of people using only a phone service?
 	sqlstring='SELECT (count(*)*100/ (select count(*) from clientCommercialInfo)) FROM clientCommercialInfo '\
@@ -29,7 +29,7 @@ def analyzeDB(con):
 	print ''		
 
 	result = executeQuery(con,sqlstring)
-	print 'proportion of people only using a phone service ',unicode(result[0][0])+'%'
+	print '--->proportion of people only using a phone service =',unicode(result[0][0])+'%'
 
 	#3) what is the average ages of people using only different services?"
 	#3.1 a combi:
@@ -45,7 +45,7 @@ def analyzeDB(con):
 		days=days+(dt.date.today()-element[0]).days
 		#print element
 
-	print "average age of combi users ",float(days/len(result) / (365.))
+	print "--->average age of combi users = ",float(days/len(result) / (365.))
 
 
 	#3.2 only TV:
@@ -61,7 +61,7 @@ def analyzeDB(con):
 	for element in result:
 		days=days+(dt.date.today()-element[0]).days
 		#print element
-	print "average age of only TV users", float(days/len(result) / (365.))
+	print "--->average age of only TV users = ", float(days/len(result) / (365.))
 
 
 	#average income of of clients younger than 40 years old with a combi subscription
@@ -84,7 +84,7 @@ def analyzeDB(con):
 	result = executeQuery(con,sqlstring)
 	for element in result:
 		cost+=element[0]
-	print "average revenue from combi users younger than 40", float(cost/len(result))
+	print "--->average revenue from combi users younger than 40 years old =", float(cost/len(result))
 
 
 if __name__=='__main__':
@@ -96,6 +96,8 @@ if __name__=='__main__':
 
 	#ANALYZE THE DATABASE
 	analyzeDB(con)
+
+	
 
 
 
